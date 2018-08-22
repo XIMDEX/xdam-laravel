@@ -7,15 +7,13 @@ use Xfind\Models\Item;
 abstract class Resource extends Item
 {
 
-    const TYPE = 'xresource';
-
     public static $rules = [
         'name' => ['type' => 'string', 'required' => true],
         'context' => ['type' => 'string', 'required' => true],
-        'owner' => ['type' => 'string', 'required' => true],
+        'owner' => ['type' => 'string', 'required' => false],
         'auth_users' => ['type' => 'string', 'required' => true],
         'auth_groups' => ['type' => 'string', 'required' => true],
-        'preview' => ['type' => 'string', 'required' => true],
+        'preview' => ['type' => 'string', 'required' => false],
         'type' => ['type' => 'string', 'required' => true],
         'description' => ['type' => 'string', 'required' => false],
         'tags' => ['type' => 'array', 'required' => false]
@@ -40,7 +38,12 @@ abstract class Resource extends Item
         foreach ($attributes as $attribute => $value) {
             $this->$attribute = $value;
         }
-        return $this->createOrUpdate();
+
+        $this->beforeSave();
+        $res = $this->createOrUpdate();
+        $this->afterSave();
+
+        return $res;
     }
 
     public function remove(string $id): bool
@@ -61,5 +64,14 @@ abstract class Resource extends Item
         return parent::find($query, $sort);
     }
 
+    protected function beforeSave()
+    {
+
+    }
+
+    protected function afterSave()
+    {
+
+    }
 
 }
