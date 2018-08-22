@@ -1,0 +1,23 @@
+{
+    "name": "ximdex/dam-laravel",
+    "description": "Document access management",
+    "authors": [
+        {
+            "name": "David Arroyo",
+            "email": "darroyo@ximdex.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Dam\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dam\\DamServiceProvider"
+            ]
+        }
+    }
+}
