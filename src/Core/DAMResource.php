@@ -16,7 +16,7 @@ class DAMResource
             $attrs = $resource->attrsToIndex();
             $saved = $resIndex->save($attrs);
             if (!$saved) {
-                throw new \ErrorException('Model indexation not saved');
+                throw new \ErrorException('Model indexation not saved', 400);
             }
         }
         return $resource;

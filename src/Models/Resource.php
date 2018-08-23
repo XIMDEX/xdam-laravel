@@ -9,10 +9,10 @@ abstract class Resource extends Item
 
     public static $rules = [
         'name' => ['type' => 'string', 'required' => true],
-        'context' => ['type' => 'string', 'required' => true],
+        'context' => ['type' => 'array', 'required' => true],
         'owner' => ['type' => 'string', 'required' => false],
-        'auth_users' => ['type' => 'string', 'required' => true],
-        'auth_groups' => ['type' => 'string', 'required' => true],
+        'auth_users' => ['type' => 'array', 'required' => true],
+        'auth_groups' => ['type' => 'array', 'required' => true],
         'preview' => ['type' => 'string', 'required' => false],
         'type' => ['type' => 'string', 'required' => true],
         'description' => ['type' => 'string', 'required' => false],
@@ -35,15 +35,19 @@ abstract class Resource extends Item
     /*********************** Methods ***********************/
     public function save(array $attributes): bool
     {
+        $saved = false;
+        $this->beforeSave($attributes);
+
         foreach ($attributes as $attribute => $value) {
             $this->$attribute = $value;
         }
 
-        $this->beforeSave();
-        $res = $this->createOrUpdate();
-        $this->afterSave();
+        if (count($this->validate()['valid'])) {
+            $saved = $this->createOrUpdate();
+        }
+        $this->afterSave($saved);
 
-        return $res;
+        return $saved;
     }
 
     public function remove(string $id): bool
@@ -64,12 +68,12 @@ abstract class Resource extends Item
         return parent::find($query, $sort);
     }
 
-    protected function beforeSave()
+    protected function beforeSave(array &$attributes)
     {
 
     }
 
-    protected function afterSave()
+    protected function afterSave($saved)
     {
 
     }
