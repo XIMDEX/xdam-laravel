@@ -8,6 +8,9 @@
         }
     ],
     "minimum-stability": "dev",
+    "require": {
+        "ximdex/xfind-laravel": "*"
+    },
     "autoload": {
         "psr-4": {
             "Dam\\": "src/"
