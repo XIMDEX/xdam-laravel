@@ -17,7 +17,6 @@ class GenerateThumbnail
 
     public static function create($filename, $pathFile, $type, $mimeType, $storage, array $thumbnails = null)
     {
-
         if (($type == 'image' && $mimeType != 'image/svg') || $type == 'pdf') {
             if ($type == 'image') {
                 $img = Image::make($pathFile);
@@ -33,7 +32,7 @@ class GenerateThumbnail
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 });
-                $thum->save("{$storage}{$name}_{$filename}");
+                $thum->save("{$storage}/{$name}_{$filename}");
             }
         } else {
             Log::warning("Thumbnail can not be created to {$type} with MIME type {$mimeType}");

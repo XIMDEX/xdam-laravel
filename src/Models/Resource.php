@@ -42,7 +42,7 @@ abstract class Resource extends Item
             $this->$attribute = $value;
         }
 
-        if (count($this->validate()['valid'])) {
+        if ($this->validate()['valid']) {
             $saved = $this->createOrUpdate();
         }
         $this->afterSave($saved);
