@@ -35,7 +35,7 @@ class DamServiceProvider extends EventServiceProvider
         $this->loadViewsFrom(__DIR__ . "/../resources", 'xdam');
         $this->publishes([
             __DIR__ . '/../public/' => public_path('vendor/xdam'),
-            __DIR__ . '/../resources/' => resource_path('vendor/xdam'),
+            __DIR__ . '/../resources/' => resource_path('views/vendor/xdam'),
         ]);
     }
 
