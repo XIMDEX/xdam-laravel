@@ -1,4 +1,4 @@
-# XDAM
+# XDAM service
 XDAM back-end
 
 Backend application for Ximdex's Digital Asset Management module (XDAM).
