@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>PolyDam</title>
@@ -7,13 +8,15 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="stylesheet" href="styles.9ab01506534b3c7568df.css"></head>
+<link rel="stylesheet" href="styles.bc8187630b956372575f.css"></head>
+
 <body>
   <app-root>
     <script>
       window.$xdam = {
         token: "ssdfksj856erfh3vs634pldaskg",
         base_url: 'http://universo.lh/api/v1/',
+        profile: 'light',
         endpoints: {
           resources: {
             list: 'resources?context_resource=resource',
@@ -23,55 +26,51 @@
           }
         },
         forms: {
-			name: "Formulario planetas",
-			id: 1,
-            endpoint: "resources",
-            api: false,
-			fields: [
-				{
-				  type: "dropdown",
-				  object: {
-				      "key": "planet",
-				      label: "Seleccione un planeta",
-				      options: [
-				        {key: "1", value: "TEST3333"},
-				        {key: "2", value: "PRUEBA 1"},
-				        {key: "3", value: "I"}
-				      ],
-				      "order": 1
-				    }
-			    },
-			    { 
-			      type: "depdrop",
-				  object: {
-				      key: "items",
-				      label: "Seleccione una plabara",
-				      ref: "planet",
-			      	  endpoint: "items",
-				      order: 2,
-                      param: "planet_id",
-                      map: {
-                          key: 'id',
-                          value: 'title'
-                      }
-                    }
-                },
-                {
-                    type: "dropdown",
-				    object: {
-                        key: "type",
-                        label: "Seleccione un tipo",
-                        options: [
-                            {key: "1", value: "Activación"},
-                            {key: "2", value: "Investigación"},
-                        ],
-                        order: 3
-				    }
+          name: "resource-form",
+          endpoint: "resources",
+          api: false,
+          fields: [
+            {
+              type: "dropdown",
+              object: {
+                key: "items",
+                multi: true,
+                searchable: true,
+                fetchable: true,
+                endpoint: 'items?limit=0',
+                label: "Seleccione una palabra",
+                options: [],
+                order: 1,
+                realName: 'items',
+                map: {
+                  key: "id",
+                  value: "title"
                 }
-            ]
+              }
+            },
+            {
+              "type": "dropdown",
+              "object": {
+                "key": "category",
+                "label": "Seleccione un tipo",
+                "options": [
+                  {
+                    "key": "investigation",
+                    "value": "Investigación"
+                  },
+                  {
+                    "key": "activation",
+                    "value": "Activación"
+                  }
+                ],
+                "order": 2
+              }
+            }
+          ]
         }
-    }
+      }
     </script>
   </app-root>
-<script type="text/javascript" src="runtime.a66f828dca56eeb90e02.js"></script><script type="text/javascript" src="polyfills.2f4a59095805af02bd79.js"></script><script type="text/javascript" src="main.610191a5f0dbbe4c56b3.js"></script></body>
+<script type="text/javascript" src="runtime.a66f828dca56eeb90e02.js"></script><script type="text/javascript" src="polyfills.2f4a59095805af02bd79.js"></script><script type="text/javascript" src="main.8fbcaeb5c3e7ab0dddfe.js"></script></body>
+
 </html>
