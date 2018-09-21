@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="stylesheet" href="styles.css"></head>
+<link rel="stylesheet" href="styles.d0e7e47f133a827525be.css"></head>
 
 <body>
   <app-root>
@@ -67,11 +67,30 @@
               }
             },
             {
+              type: "dropdown",
+              object: {
+                realName: 'license',
+                key: 'license_id',
+                multi: false,
+                searchable: true,
+                fetchable: true,
+                endpoint: 'licenses?limit=0',
+                label: "Seleccione una licencia",
+                options: [],
+                order: 3,
+                map: {
+                  key: "id",
+                  value: "title"
+                }
+              }
+            },
+            {
               type: "text-area",
               object: {
-                key: "license",
+                realName: 'license_desc',
+                key: "license_desc",
                 label: "Licencia",
-                order: 3
+                order: 4
               }
             }
           ]
@@ -79,6 +98,6 @@
       }
     </script>
   </app-root>
-<script type="text/javascript" src="runtime.js"></script><script type="text/javascript" src="polyfills.2f4a59095805af02bd79.js"></script><script type="text/javascript" src="main.4fff19cb28f8cb309d6d.js"></script></body>
+<script type="text/javascript" src="runtime.a66f828dca56eeb90e02.js"></script><script type="text/javascript" src="polyfills.2f4a59095805af02bd79.js"></script><script type="text/javascript" src="main.37860bd5f8ab4811ffc3.js"></script></body>
 
 </html>
