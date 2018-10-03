@@ -33,9 +33,11 @@ class DamServiceProvider extends EventServiceProvider
             CreateThumbnail::class
         ]);
         $this->loadViewsFrom(__DIR__ . "/../resources", 'xdam');
+
         $this->publishes([
             __DIR__ . '/../public/' => public_path('vendor/xdam'),
             __DIR__ . '/../resources/' => resource_path('views/vendor/xdam'),
+            __DIR__ . '/../config/config.php' => config_path('xdam.php')
         ]);
     }
 
@@ -46,5 +48,8 @@ class DamServiceProvider extends EventServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/config.php', 'xdam'
+        );
     }
 }
