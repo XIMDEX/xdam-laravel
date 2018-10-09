@@ -2,10 +2,11 @@
 
 namespace Dam;
 
-use Illuminate\Foundation\Support\Providers\EventServiceProvider;
-use Dam\Console\Commands\CreateThumbnail;
 use Dam\Events\ResourceSaved;
 use Dam\Listeners\GenerateThumbnails;
+use Dam\Console\Commands\ReindexCommand;
+use Dam\Console\Commands\CreateThumbnail;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 
 class DamServiceProvider extends EventServiceProvider
 {
@@ -30,15 +31,22 @@ class DamServiceProvider extends EventServiceProvider
     {
         parent::boot();
         $this->commands([
-            CreateThumbnail::class
+            CreateThumbnail::class,
+            ReindexCommand::class,
         ]);
         $this->loadViewsFrom(__DIR__ . "/../resources", 'xdam');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'xfind');
 
         $this->publishes([
             __DIR__ . '/../public/' => public_path('vendor/xdam'),
-            __DIR__ . '/../resources/' => resource_path('views/vendor/xdam'),
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/xdam'),
             __DIR__ . '/../config/config.php' => config_path('xdam.php')
         ]);
+
+        $this->publishes([
+            __DIR__ . '/../resources/lang' => resource_path('lang'),
+        ], 'langs');
+
     }
 
     /**
