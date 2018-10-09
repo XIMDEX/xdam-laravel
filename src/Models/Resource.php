@@ -6,8 +6,10 @@ use Xfind\Models\Item;
 
 abstract class Resource extends Item
 {
+    public static $search = 'name';
 
-    public static $rules = [
+    protected static $rules = [
+        'id' => ['type' => 'string', 'required' => true],
         'name' => ['type' => 'string', 'required' => true],
         'context' => ['type' => 'array', 'required' => true],
         'owner' => ['type' => 'string', 'required' => false],
@@ -16,7 +18,18 @@ abstract class Resource extends Item
         'preview' => ['type' => 'string', 'required' => false],
         'type' => ['type' => 'string', 'required' => true],
         'description' => ['type' => 'string', 'required' => false],
-        'tags' => ['type' => 'array', 'required' => false]
+        'tags' => ['type' => 'array', 'required' => false],
+        'mime_type' => ['type' => 'string', 'required' => false],
+        'extension' => ['type' => 'string', 'required' => false],
+    ];
+
+    protected static $facets = [
+        'type',
+        'mime_type',
+        'extension',
+        'owner',
+        'type',
+        'tags'
     ];
 
     protected $highlight_fields = [
@@ -24,9 +37,7 @@ abstract class Resource extends Item
 
     public function __construct()
     {
-        $this->facets = array_merge($this->facets, [
-            'type'
-        ]);
+        static::$facets = array_merge(static::$facets, self::$facets);
         static::$rules = array_merge(static::$rules, self::$rules);
         parent::__construct();
     }
@@ -52,30 +63,25 @@ abstract class Resource extends Item
 
     public function remove(string $id): bool
     {
-        return $this->delete($id) ? true : false;
+        return $this->delete($id);
     }
 
     public function find($query = null, array $sort = [])
     {
         if (is_null($query)) {
             $query = $this->query;
-        }
+        }        
 
         $sort = array_merge($sort, ['date' => 'desc'], $this->sort);
-
-        $query = "($query) AND type:" . static::TYPE;
 
         return parent::find($query, $sort);
     }
 
     protected function beforeSave(array &$attributes)
     {
-
     }
 
     protected function afterSave($saved)
     {
-
     }
-
 }
