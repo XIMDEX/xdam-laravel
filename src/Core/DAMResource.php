@@ -15,9 +15,11 @@ class DAMResource
         
         if ($hasSolr && $resource !== false) {
             $attrs = $resource->attrsToIndex();
-            $saved = $resIndex->save($attrs);
-            if (!$saved) {
-                throw new \ErrorException('Model indexation not saved', 400);
+            if (!is_null($attrs)) {
+                $saved = $resIndex->save($attrs);
+                if (!$saved) {
+                    throw new \ErrorException('Model indexation not saved', 400);
+                }
             }
         }
         return $resource;

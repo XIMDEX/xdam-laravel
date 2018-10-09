@@ -2,6 +2,8 @@
 
 namespace Dam\Interfaces\Models;
 
+use Dam\Models\Resource;
+
 interface DamPersist
 {
 
@@ -15,9 +17,11 @@ interface DamPersist
 
     public function getMimeType(): string;
 
+    public function getDamModel();
+
     /*********************** Methods ***********************/
     public function store(array $attributes): DamPersist;
 
-    public function attrsToIndex(): array;
+    public function attrsToIndex(): ?array;
 
 }
