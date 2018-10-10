@@ -16,7 +16,10 @@ class ReindexCommand extends Command
      * @var string
      */
     protected $signature = 'dam:regenerate 
-                            {model : Resource model}';
+                            {model : Resource model}
+                            {--id=* : Id of resource}
+                            {--from= : first resource to index}
+                            {--to= : Last resource to index}';
 
     /**
      * The console command description.
@@ -35,11 +38,25 @@ class ReindexCommand extends Command
      */
     public function handle()
     {
-        $model = $this->argument('model');
+        $modelName = $this->argument('model');
 
-        $this->message("Get models from $model");
+        $query = $modelName::query();
 
-        foreach ($model::cursor() as $resource)
+        if ($ids = $this->option('id')) {
+            $query->whereIn('id', $ids);
+        }
+
+        if ($from = $this->option('from')) {
+            $query->where('id', '>=' ,$from);
+        }
+        
+        if ($to = $this->option('to')) {
+            $query->where('id', '<=' ,$to);
+        }
+
+        $this->message("Get models from {$modelName}");
+
+        foreach ($query->cursor() as $resource)
         {
             $data = $resource->attrsToIndex();
             if (is_null($data)) {
@@ -48,7 +65,14 @@ class ReindexCommand extends Command
             
             $this->message("Start to index id:{$data['id']}");
             $dam = $resource->getDamModel();
-            $dam->save($data);
+
+            try {
+                $dam->save($data);
+            } catch (\ErrorException $ex) {
+                 $message = "Failed to index id:{$data['id']} with message: {$ex->getMessage()}";
+                 \Log::error($message);
+                 $this->message($message, 'error');
+            }
         }
 
     }

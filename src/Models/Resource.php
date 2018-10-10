@@ -29,7 +29,7 @@ abstract class Resource extends Item
         'extension',
         'owner',
         'type',
-        'tags'
+        'tags',
     ];
 
     protected $highlight_fields = [
@@ -52,18 +52,23 @@ abstract class Resource extends Item
         foreach ($attributes as $attribute => $value) {
             $this->$attribute = $value;
         }
+        ['valid' => $valid, 'errors' => $errors] = $this->validate();
 
-        if ($this->validate()['valid']) {
+        if ($valid) {
             $saved = $this->createOrUpdate();
+            $this->afterSave($saved);
+        } else {
+            $this->remove($this->id);
+            $message = '[ ' . implode('; ', $errors) . " ], Resource with id: {$this->id} deleted";
+            throw new \ErrorException($message);
         }
-        $this->afterSave($saved);
 
         return $saved;
     }
 
     public function remove(string $id): bool
     {
-        return $this->delete($id);
+        return $this->delete($id) ? true : false;
     }
 
     public function find($query = null, array $sort = [])
@@ -72,7 +77,7 @@ abstract class Resource extends Item
             $query = $this->query;
         }        
 
-        $sort = array_merge($sort, ['date' => 'desc'], $this->sort);
+        $sort = array_merge($sort, $this->defaultSort, $this->sort);
 
         return parent::find($query, $sort);
     }
