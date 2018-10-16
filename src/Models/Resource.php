@@ -68,7 +68,7 @@ abstract class Resource extends Item
 
     public function remove(string $id): bool
     {
-        return $this->delete($id) ? true : false;
+        return $this->delete($id);
     }
 
     public function find($query = null, array $sort = [])
