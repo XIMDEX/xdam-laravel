@@ -6,6 +6,7 @@ use Dam\Models\Resource;
 use Dam\Core\GenerateThumbnail;
 use Illuminate\Console\Command;
 use Dam\Interfaces\Models\DamPersist;
+use Solarium\Exception\HttpException;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 
 class ReindexCommand extends Command
@@ -64,17 +65,34 @@ class ReindexCommand extends Command
             }
             
             $this->message("Start to index id:{$data['id']}");
-            $dam = $resource->getDamModel();
-
-            try {
-                $dam->save($data);
-            } catch (\ErrorException $ex) {
-                 $message = "Failed to index id:{$data['id']} with message: {$ex->getMessage()}";
-                 \Log::error($message);
-                 $this->message($message, 'error');
-            }
+            $this->save($resource, $data);
         }
 
+    }
+
+    private function save($resource, $data, $retry = 0)
+    {
+        try {
+            $dam = $resource->getDamModel();
+            $dam->save($data);
+        } catch (HttpException $ex) {
+            $message = "Failed to save in solr with message: {$ex->getMessage()}";
+            if ($retry < 10) {
+                $message .= ", retry in 5 seconds";
+                \Log::error($message);
+                $this->message($message, 'line');
+                sleep(2);
+                $this->save($resource, $data, ++$retry);
+            } else {
+                $message .= ", max retry reached";
+                \Log::error($message);
+                $this->message($message, 'error');
+            }
+        }catch (\ErrorException $ex) {
+             $message = "Failed to index id:{$data['id']} with message: {$ex->getMessage()}";
+             \Log::error($message);
+             $this->message($message, 'error');
+        }
     }
 
     protected function message($message, $type = 'info')
