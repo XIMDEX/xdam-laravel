@@ -58,9 +58,14 @@ abstract class Resource extends Item
             $saved = $this->createOrUpdate();
             $this->afterSave($saved);
         } else {
-            $this->remove($this->id);
-            $message = '[ ' . implode('; ', $errors) . " ], Resource with id: {$this->id} deleted";
-            throw new \ErrorException($message);
+            try {
+                $this->remove($this->id);
+                $message = '[ ' . implode('; ', $errors) . " ], Resource with id: {$this->id} deleted";
+                throw new \ErrorException($message);
+            } catch (\Exception $ex) {
+                $message = '[ ' . implode('; ', $errors) . " ], Resource with id: {$this->id} not exists";
+                throw new \ErrorException($message);
+            }
         }
 
         return $saved;
