@@ -34,7 +34,7 @@ class DamServiceProvider extends EventServiceProvider
             CreateThumbnail::class,
             ReindexCommand::class,
         ]);
-        $this->loadViewsFrom(__DIR__ . "/../resources", 'xdam');
+        $this->loadViewsFrom(__DIR__ . "/../resources/views", 'xdam');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'xfind');
 
         $this->publishes([
@@ -46,7 +46,6 @@ class DamServiceProvider extends EventServiceProvider
         $this->publishes([
             __DIR__ . '/../resources/lang' => resource_path('lang'),
         ], 'langs');
-
     }
 
     /**
@@ -57,7 +56,8 @@ class DamServiceProvider extends EventServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/config.php', 'xdam'
+            __DIR__.'/../config/config.php',
+            'xdam'
         );
     }
 }
