@@ -18,7 +18,8 @@ class Dam
             'hash' => 'id',
             'size' => '',
             'type' => 'type',
-            'image' => 'preview'
+            'image' => 'preview',
+            'context' => 'context'
         ],
         'requests' => [
             'get' => 'hash',
@@ -57,9 +58,14 @@ class Dam
         return $this;
     }
 
-    public function setItemsModel(?string $id = null, ?string $title = null, ?string $hash = null, ?string $size = null, 
-        ?string $type = null, ?string $image = null)
-    {
+    public function setItemsModel(
+        ?string $id = null,
+        ?string $title = null,
+        ?string $hash = null,
+        ?string $size = null,
+        ?string $type = null,
+        ?string $image = null
+    ) {
         $params = [
             'id' => $id,
             'title' => $title,

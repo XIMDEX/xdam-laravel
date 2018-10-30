@@ -74,7 +74,7 @@ class ReindexCommand extends Command
     {
         try {
             $dam = $resource->getDamModel();
-            $dam->save($data);
+            $dam->save($data);            
         } catch (HttpException $ex) {
             $message = "Failed to save in solr with message: {$ex->getMessage()}";
             if ($retry < 10) {
@@ -88,10 +88,14 @@ class ReindexCommand extends Command
                 \Log::error($message);
                 $this->message($message, 'error');
             }
-        }catch (\ErrorException $ex) {
-             $message = "Failed to index id:{$data['id']} with message: {$ex->getMessage()}";
-             \Log::error($message);
-             $this->message($message, 'error');
+        } catch (\ErrorException $ex) {
+            $message = "Failed to index id:{$data['id']} with message: {$ex->getMessage()}";
+            \Log::error($message);
+            $this->message($message, 'error');
+        } catch (\Exception $ex) {
+            $message = "Failed to index id:{$data['id']} with message: {$ex->getMessage()}";
+            \Log::error($message);
+            $this->message($message, 'error');
         }
     }
 
