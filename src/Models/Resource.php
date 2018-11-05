@@ -10,6 +10,7 @@ abstract class Resource extends Item
 
     protected static $rules = [
         'id' => ['type' => 'string', 'required' => true],
+        'context_resource' => ['type' => 'string', 'required' => true],
         'name' => ['type' => 'string', 'required' => true],
         'context' => ['type' => 'array', 'required' => true],
         'owner' => ['type' => 'string', 'required' => false],
@@ -37,8 +38,8 @@ abstract class Resource extends Item
 
     public function __construct()
     {
-        static::$facets = array_merge(static::$facets, self::$facets);
-        static::$rules = array_merge(static::$rules, self::$rules);
+        static::$facets = array_merge(self::$facets, static::$facets);
+        static::$rules = array_merge(self::$rules, static::$rules);
         parent::__construct();
     }
 
