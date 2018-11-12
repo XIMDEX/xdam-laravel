@@ -9,7 +9,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "ximdex/xfind-laravel": "*"
+        "ximdex/xfind-laravel": "dev-develop",
+        "vaites/php-apache-tika": "^0.5.1"
     },
     "autoload": {
         "psr-4": {
