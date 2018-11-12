@@ -2,13 +2,15 @@
 
 namespace Dam\Core;
 
+use Metadata\Enums\Metadata;
 use Illuminate\Support\Facades\Auth;
 
 class Dam
 {
     private $url;
     private $token;
-    private $form;
+    private $form = [];
+    private $tabsForm = [];
     private $profile;
     private $endpoints = ['resources' => []];
     private $models = [
@@ -32,12 +34,19 @@ class Dam
     {
         $apiTokenField = config('xdam.user_token_filed');
         $this->url = $url;
-        $this->token = !is_null($token) ? $token : Auth::user()->$apiTokenField;
+        $user = Auth::user();
+        $this->token = !is_null($token) ? $token : $user->$apiTokenField;
     }
 
     public function setForm(array $form)
     {
         $this->form = $form;
+        return $this;
+    }
+
+    public function setTabsForm(array $form)
+    {
+        $this->tabsForm = $form;
         return $this;
     }
 
@@ -105,8 +114,10 @@ class Dam
     {
         $dam = [
             'dam_url' => $this->url,
+            'dam_baseparams' => [],
             'dam_token' => $this->token,
             'dam_form' => $this->form,
+            'dam_tabs_form' => $this->tabsForm,
             'dam_endpoints' => $this->endpoints,
             'dam_models' => $this->models
         ];
