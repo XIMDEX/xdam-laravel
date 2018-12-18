@@ -10,6 +10,7 @@ abstract class Resource extends Item
 
     protected static $rules = [
         'id' => ['type' => 'string', 'required' => true],
+        'repository_id' => ['type' => 'string', 'required' => true],
         'context_resource' => ['type' => 'string', 'required' => true],
         'name' => ['type' => 'string', 'required' => true],
         'context' => ['type' => 'array', 'required' => true],
@@ -81,7 +82,7 @@ abstract class Resource extends Item
     {
         if (is_null($query)) {
             $query = $this->query;
-        }        
+        }
 
         $sort = array_merge($sort, $this->defaultSort, $this->sort);
 
