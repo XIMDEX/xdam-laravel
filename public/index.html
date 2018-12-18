@@ -8,113 +8,884 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="stylesheet" href="styles.7595a7a64dd43f1bc348.css"></head>
+<link rel="stylesheet" href="styles.f30f12ac759208e2d903.css"></head>
 
 <body>
   <app-root>
     <script>
       window.$xdam = {
-        token: '49b5d089bd56fd4eae7059e526a3fc39f17d49f962304decbcbfc5032c1e',
-        base_url: 'http://universo.lab14/api/v1/',
-        base_params: {
-        },
-        profile: 'light',
-        endpoints: {
-          resources: {
-            list: 'resources/dam',
-            get: 'resources',
-            post: 'resources',
-            delete: 'resources'
-          }
-        },
-        models: {
-          item: {
-            id: 'resource_id',
-            title: 'name',
-            hash: 'id',
-            size: '',
-            type: 'type',
-            image: 'preview'
-          },
-          requests: {
-            get: 'hash',
-            delete: 'id',
-            put: 'id'
-          }
-        },
-        forms: {
-          name: "resource-form",
-          endpoint: "resources",
-          api: false,
-          fields: [
-            {
-              type: "dropdown",
-              object: {
-                key: "items",
-                multi: true,
-                searchable: true,
-                fetchable: true,
-                endpoint: 'items?limit=0',
-                label: "Seleccione una palabra",
-                options: [],
-                order: 1,
-                realName: 'items',
-                map: {
-                  key: "id",
-                  value: "title"
-                }
-              }
-            },
-            {
-              type: "dropdown",
-              object: {
-                key: "category",
-                label: "Seleccione un tipo",
-                options: [
-                  {
-                    key: "investigation",
-                    value: "Investigación"
-                  },
-                  {
-                    key: "activation",
-                    value: "Activación"
-                  }
-                ],
-                order: 2
-              }
-            },
-            {
-              type: "dropdown",
-              object: {
-                realName: 'license',
-                key: 'license_id',
-                multi: false,
-                searchable: true,
-                fetchable: true,
-                endpoint: 'licenses?limit=0',
-                label: "Seleccione una licencia",
-                options: [],
-                order: 3,
-                map: {
-                  key: "id",
-                  value: "title"
-                }
-              }
-            },
-            {
-              type: "text-area",
-              object: {
-                realName: 'license_desc',
-                key: "license_desc",
-                label: "Licencia",
-                order: 4
-              }
-            }
-          ]
+    "token": "fa98a60ede963840f689addaebaa2c3ed1082b3e190de7fcf5d03335ee4d",
+    "base_url": "http://universo.lab14/api/v1/",
+    "base_params": {},
+    "profile": "light",
+    "endpoints": {
+        "resources": {
+            "list": "resources\/dam",
+            "get": "resources",
+            "post": "resources",
+            "delete": "resources"
         }
-      }
+    },
+    "models": {
+        "item": {
+            "id": "resource_id",
+            "title": "name",
+            "hash": "id",
+            "size": "",
+            "type": "type",
+            "image": "preview",
+            "context": "context"
+        },
+        "requests": {
+            "get": "hash",
+            "delete": "id",
+            "put": "id"
+        }
+    },
+    "forms": {
+        "name": "resource-form",
+        "endpoint": "resources",
+        "api": false,
+        "fields": [
+            {
+                "type": "dropdown",
+                "object": {
+                    "realName": "items",
+                    "key": "items",
+                    "label": "Seleccione una palabra",
+                    "multi": true,
+                    "searchable": true,
+                    "fetchable": true,
+                    "endpoint": "items?limit=0",
+                    "order": 1,
+                    "options": [],
+                    "map": {
+                        "key": "id",
+                        "value": "title"
+                    }
+                }
+            },
+            {
+                "type": "dropdown",
+                "object": {
+                    "key": "category",
+                    "label": "Seleccione un tipo",
+                    "options": [
+                        {
+                            "key": "investigation",
+                            "value": "Investigaci\u00f3n"
+                        },
+                        {
+                            "key": "activation",
+                            "value": "Activaci\u00f3n"
+                        }
+                    ],
+                    "order": 2
+                }
+            },
+            {
+                "type": "dropdown",
+                "object": {
+                    "realName": "license",
+                    "key": "license_id",
+                    "label": "Seleccione una licencia",
+                    "multi": false,
+                    "searchable": true,
+                    "fetchable": true,
+                    "endpoint": "licenses?limit=0",
+                    "order": 3,
+                    "options": [],
+                    "map": {
+                        "key": "id",
+                        "value": "title"
+                    }
+                }
+            },
+            {
+                "type": "text-area",
+                "object": {
+                    "realName": "license_desc",
+                    "key": "license_desc",
+                    "label": "Licencia",
+                    "order": 4
+                }
+            }
+        ]
+    },
+    "tabsform": {
+        "name": "lomes",
+        "title": "LOMES",
+        "api": false,
+        "tabs": [
+            {
+                "title": "General",
+                "fields": [
+                    {
+                        "object": {
+                            "realName": "tabsform.metadata.1.1",
+                            "key": "metadata[1][1]",
+                            "label": "Identificador"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[1][2]",
+                            "key": "metadata[1][2]",
+                            "label": "Cat\u00e1logo"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[1][3]",
+                            "key": "metadata[1][3]",
+                            "label": "Entrada"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[1][4]",
+                            "key": "metadata[1][4]",
+                            "label": "T\u00edtulo"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[1][5]",
+                            "key": "metadata[1][5]",
+                            "label": "Idioma",
+                            "map": {
+                                "key": "id",
+                                "value": "title"
+                            },
+                            "options": [
+                                {
+                                    "key": "es",
+                                    "value": "es"
+                                },
+                                {
+                                    "key": "gl",
+                                    "value": "gl"
+                                },
+                                {
+                                    "key": "ca",
+                                    "value": "ca"
+                                },
+                                {
+                                    "key": "eu",
+                                    "value": "eu"
+                                },
+                                {
+                                    "key": "va",
+                                    "value": "va"
+                                }
+                            ]
+                        },
+                        "type": "dropdown"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[1][6]",
+                            "key": "metadata[1][6]",
+                            "label": "Descripci\u00f3n"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[1][7]",
+                            "key": "metadata[1][7]",
+                            "label": "Palabras Clave"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[1][8]",
+                            "key": "metadata[1][8]",
+                            "label": "\u00c1mbito"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[1][9]",
+                            "key": "metadata[1][9]",
+                            "label": "Estructura"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[1][10]",
+                            "key": "metadata[1][10]",
+                            "label": "Nivel de agregaci\u00f3n"
+                        },
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "title": "Ciclo de Vida",
+                "fields": [
+                    {
+                        "object": {
+                            "realName": "metadata[2][11]",
+                            "key": "metadata[2][11]",
+                            "label": "Versi\u00f3n"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[2][12]",
+                            "key": "metadata[2][12]",
+                            "label": "Estado"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[2][13]",
+                            "key": "metadata[2][13]",
+                            "label": "Contribuci\u00f3n"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[2][14]",
+                            "key": "metadata[2][14]",
+                            "label": "Tipo"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[2][15]",
+                            "key": "metadata[2][15]",
+                            "label": "Entidad"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[2][16]",
+                            "key": "metadata[2][16]",
+                            "label": "Fecha"
+                        },
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "title": "Meta-metadatos",
+                "fields": [
+                    {
+                        "object": {
+                            "realName": "metadata[3][1]",
+                            "key": "metadata[3][1]",
+                            "label": "Identificador"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[3][2]",
+                            "key": "metadata[3][2]",
+                            "label": "Cat\u00e1logo"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[3][3]",
+                            "key": "metadata[3][3]",
+                            "label": "Entrada"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[3][13]",
+                            "key": "metadata[3][13]",
+                            "label": "Contribuci\u00f3n"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[3][14]",
+                            "key": "metadata[3][14]",
+                            "label": "Tipo"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[3][15]",
+                            "key": "metadata[3][15]",
+                            "label": "Entidad"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[3][16]",
+                            "key": "metadata[3][16]",
+                            "label": "Fecha"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[3][17]",
+                            "key": "metadata[3][17]",
+                            "label": "Esquema de Metadatos"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[3][5]",
+                            "key": "metadata[3][5]",
+                            "label": "Idioma",
+                            "options": [
+                                {
+                                    "key": "es",
+                                    "value": "es"
+                                },
+                                {
+                                    "key": "gl",
+                                    "value": "gl"
+                                },
+                                {
+                                    "key": "ca",
+                                    "value": "ca"
+                                },
+                                {
+                                    "key": "eu",
+                                    "value": "eu"
+                                },
+                                {
+                                    "key": "va",
+                                    "value": "va"
+                                }
+                            ]
+                        },
+                        "type": "dropdown"
+                    }
+                ]
+            },
+            {
+                "title": "T\u00e9cnica",
+                "fields": [
+                    {
+                        "object": {
+                            "realName": "metadata[4][18]",
+                            "key": "metadata[4][18]",
+                            "label": "Formato"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[4][19]",
+                            "key": "metadata[4][19]",
+                            "label": "Tama\u00f1o"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[4][20]",
+                            "key": "metadata[4][20]",
+                            "label": "Localizaci\u00f3n"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[4][21]",
+                            "key": "metadata[4][21]",
+                            "label": "Requisitos de Instalaci\u00f3n"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[4][22]",
+                            "key": "metadata[4][22]",
+                            "label": "Agregador"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[4][14]",
+                            "key": "metadata[4][14]",
+                            "label": "Tipo"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[4][23]",
+                            "key": "metadata[4][23]",
+                            "label": "Nombre"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[4][24]",
+                            "key": "metadata[4][24]",
+                            "label": "Versi\u00f3n M\u00ednima"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[4][25]",
+                            "key": "metadata[4][25]",
+                            "label": "Versi\u00f3n M\u00e1xima"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[4][26]",
+                            "key": "metadata[4][26]",
+                            "label": "Pautas de Instalaci\u00f3n"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[4][27]",
+                            "key": "metadata[4][27]",
+                            "label": "Otros Requisitos de Plataforma"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[4][28]",
+                            "key": "metadata[4][28]",
+                            "label": "Duraci\u00f3n"
+                        },
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "title": "Uso Educativo",
+                "fields": [
+                    {
+                        "object": {
+                            "realName": "metadata[5][29]",
+                            "key": "metadata[5][29]",
+                            "label": "Tipo de Interactividad",
+                            "options": [
+                                {
+                                    "key": "activo",
+                                    "value": "activo"
+                                },
+                                {
+                                    "key": "explosivo",
+                                    "value": "explosivo"
+                                },
+                                {
+                                    "key": "combinado",
+                                    "value": "combinado"
+                                }
+                            ]
+                        },
+                        "type": "dropdown"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[5][30]",
+                            "key": "metadata[5][30]",
+                            "label": "Tipo de Recurso Educativo",
+                            "options": []
+                        },
+                        "type": "dropdown"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[5][31]",
+                            "key": "metadata[5][31]",
+                            "label": "Nivel de Interactividad",
+                            "options": [
+                                {
+                                    "key": "muy bajo",
+                                    "value": "muy bajo"
+                                },
+                                {
+                                    "key": "bajo",
+                                    "value": "bajo"
+                                },
+                                {
+                                    "key": "medio",
+                                    "value": "medio"
+                                },
+                                {
+                                    "key": "alto",
+                                    "value": "alto"
+                                },
+                                {
+                                    "key": "muy alto",
+                                    "value": "muy alto"
+                                }
+                            ]
+                        },
+                        "type": "dropdown"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[5][32]",
+                            "key": "metadata[5][32]",
+                            "label": "Densidad Sem\u00e1ntica"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[5][33]",
+                            "key": "metadata[5][33]",
+                            "label": "Destinatario",
+                            "options": []
+                        },
+                        "type": "dropdown"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[5][34]",
+                            "key": "metadata[5][34]",
+                            "label": "Contexto",
+                            "options": []
+                        },
+                        "type": "dropdown"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[5][35]",
+                            "key": "metadata[5][35]",
+                            "label": "Rango T\u00edpico de Edad"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[5][36]",
+                            "key": "metadata[5][36]",
+                            "label": "Dificultad",
+                            "options": [
+                                {
+                                    "key": "muy dif\u00edcil",
+                                    "value": "muy dif\u00edcil"
+                                },
+                                {
+                                    "key": "dif\u00edcil",
+                                    "value": "dif\u00edcil"
+                                },
+                                {
+                                    "key": "medio",
+                                    "value": "medio"
+                                },
+                                {
+                                    "key": "f\u00e1cil",
+                                    "value": "f\u00e1cil"
+                                },
+                                {
+                                    "key": "muy f\u00e1cil",
+                                    "value": "muy f\u00e1cil"
+                                }
+                            ]
+                        },
+                        "type": "dropdown"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[5][37]",
+                            "key": "metadata[5][37]",
+                            "label": "Tiempo T\u00edpico de Aprendizaje"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[5][6]",
+                            "key": "metadata[5][6]",
+                            "label": "Descripci\u00f3n"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[5][5]",
+                            "key": "metadata[5][5]",
+                            "label": "Idioma",
+                            "options": [
+                                {
+                                    "key": "es",
+                                    "value": "es"
+                                },
+                                {
+                                    "key": "gl",
+                                    "value": "gl"
+                                },
+                                {
+                                    "key": "ca",
+                                    "value": "ca"
+                                },
+                                {
+                                    "key": "eu",
+                                    "value": "eu"
+                                },
+                                {
+                                    "key": "va",
+                                    "value": "va"
+                                }
+                            ]
+                        },
+                        "type": "dropdown"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[5][38]",
+                            "key": "metadata[5][38]",
+                            "label": "Proceso Cognitivo",
+                            "options": []
+                        },
+                        "type": "dropdown"
+                    }
+                ]
+            },
+            {
+                "title": "Derechos",
+                "fields": [
+                    {
+                        "object": {
+                            "realName": "metadata[6][39]",
+                            "key": "metadata[6][39]",
+                            "label": "Coste",
+                            "options": [
+                                {
+                                    "key": "s\u00ed",
+                                    "value": "s\u00ed"
+                                },
+                                {
+                                    "key": "no",
+                                    "value": "no"
+                                }
+                            ]
+                        },
+                        "type": "dropdown"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[6][40]",
+                            "key": "metadata[6][40]",
+                            "label": "Derechos de Autor y otras Restricciones",
+                            "options": []
+                        },
+                        "type": "dropdown"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[6][6]",
+                            "key": "metadata[6][6]",
+                            "label": "Descripci\u00f3n"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[6][41]",
+                            "key": "metadata[6][41]",
+                            "label": "Acceso"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[6][42]",
+                            "key": "metadata[6][42]",
+                            "label": "Tipo de Acceso"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[6][6]",
+                            "key": "metadata[6][6]",
+                            "label": "Descripci\u00f3n"
+                        },
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "title": "Relaci\u00f3n",
+                "fields": [
+                    {
+                        "object": {
+                            "realName": "metadata[7][14]",
+                            "key": "metadata[7][14]",
+                            "label": "Tipo"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[7][43]",
+                            "key": "metadata[7][43]",
+                            "label": "Recurso"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[7][1]",
+                            "key": "metadata[7][1]",
+                            "label": "Identificador"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[7][2]",
+                            "key": "metadata[7][2]",
+                            "label": "Cat\u00e1logo"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[7][3]",
+                            "key": "metadata[7][3]",
+                            "label": "Entrada"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[7][6]",
+                            "key": "metadata[7][6]",
+                            "label": "Descripci\u00f3n"
+                        },
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "title": "Anotaci\u00f3n",
+                "fields": [
+                    {
+                        "object": {
+                            "realName": "metadata[8][15]",
+                            "key": "metadata[8][15]",
+                            "label": "Entidad"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[8][16]",
+                            "key": "metadata[8][16]",
+                            "label": "Fecha"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[8][6]",
+                            "key": "metadata[8][6]",
+                            "label": "Descripci\u00f3n"
+                        },
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "title": "Clasificaci\u00f3n",
+                "fields": [
+                    {
+                        "object": {
+                            "realName": "metadata[9][44]",
+                            "key": "metadata[9][44]",
+                            "label": "Prop\u00f3sito"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[9][45]",
+                            "key": "metadata[9][45]",
+                            "label": "Ruta Taxon\u00f3mica"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[9][46]",
+                            "key": "metadata[9][46]",
+                            "label": "Fuente"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[9][47]",
+                            "key": "metadata[9][47]",
+                            "label": "Tax\u00f3n"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[9][1]",
+                            "key": "metadata[9][1]",
+                            "label": "Identificador"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[9][3]",
+                            "key": "metadata[9][3]",
+                            "label": "Entrada"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[9][6]",
+                            "key": "metadata[9][6]",
+                            "label": "Descripci\u00f3n"
+                        },
+                        "type": "text"
+                    },
+                    {
+                        "object": {
+                            "realName": "metadata[9][7]",
+                            "key": "metadata[9][7]",
+                            "label": "Palabras Clave"
+                        },
+                        "type": "text"
+                    }
+                ]
+            }
+        ]
+    }
+}
     </script>
   </app-root>
-<script type="text/javascript" src="runtime.ec2944dd8b20ec099bf3.js"></script><script type="text/javascript" src="polyfills.d1c7bf4a2ae7c3435f95.js"></script><script type="text/javascript" src="main.24d97b5433d967f4148b.js"></script></body>
+<script type="text/javascript" src="runtime.ec2944dd8b20ec099bf3.js"></script><script type="text/javascript" src="polyfills.d1c7bf4a2ae7c3435f95.js"></script><script type="text/javascript" src="main.dc6a4fb96c9390bb4986.js"></script></body>
 
 </html>
