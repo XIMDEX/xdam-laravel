@@ -6,6 +6,7 @@ use Dam\Events\ResourceSaved;
 use Dam\Listeners\GenerateThumbnails;
 use Dam\Console\Commands\ReindexCommand;
 use Dam\Console\Commands\CreateThumbnail;
+use Dam\Console\Commands\RegenerateThumbnails;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 
 class DamServiceProvider extends EventServiceProvider
@@ -33,6 +34,7 @@ class DamServiceProvider extends EventServiceProvider
         $this->commands([
             CreateThumbnail::class,
             ReindexCommand::class,
+            RegenerateThumbnails::class
         ]);
         $this->loadViewsFrom(__DIR__ . "/../resources/views", 'xdam');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'xfind');
