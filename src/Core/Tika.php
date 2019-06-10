@@ -3,8 +3,8 @@
 namespace Dam\Core;
 
 use Vaites\ApacheTika\Client;
-use VD\Core\FileSystem\MimeTypes;
 use Xfind\Core\Utils\DateHelpers;
+use Ximdex\Core\FileSystem\MimeTypes;
 use Vaites\ApacheTika\Metadata\ImageMetadata;
 use Vaites\ApacheTika\Metadata\DocumentMetadata;
 
@@ -116,8 +116,8 @@ class Tika
     protected function application(DocumentMetadata $metadata)
     {
         return array_merge(
-            $this->text($metadata)
-            ,[
+            $this->text($metadata),
+            [
                 'protected' => $metadata->meta->protected ?? null
             ]
         );

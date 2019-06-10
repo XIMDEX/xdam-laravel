@@ -3,11 +3,8 @@
 namespace Dam\Console\Commands;
 
 use Dam\Models\Resource;
-use Dam\Core\GenerateThumbnail;
 use Illuminate\Console\Command;
-use Dam\Interfaces\Models\DamPersist;
 use Solarium\Exception\HttpException;
-use Symfony\Component\Console\Exception\InvalidArgumentException;
 
 class ReindexCommand extends Command
 {
@@ -48,17 +45,16 @@ class ReindexCommand extends Command
         }
 
         if ($from = $this->option('from')) {
-            $query->where('id', '>=' ,$from);
+            $query->where('id', '>=', $from);
         }
         
         if ($to = $this->option('to')) {
-            $query->where('id', '<=' ,$to);
+            $query->where('id', '<=', $to);
         }
 
         $this->message("Get models from {$modelName}");
 
-        foreach ($query->cursor() as $resource)
-        {
+        foreach ($query->cursor() as $resource) {
             $data = $resource->attrsToIndex();
             if (is_null($data)) {
                 continue;
@@ -67,14 +63,13 @@ class ReindexCommand extends Command
             $this->message("Start to index id:{$data['id']}");
             $this->save($resource, $data);
         }
-
     }
 
     private function save($resource, $data, $retry = 0)
     {
         try {
             $dam = $resource->getDamModel();
-            $dam->save($data);            
+            $dam->save($data);
         } catch (HttpException $ex) {
             $message = "Failed to save in solr with message: {$ex->getMessage()}";
             if ($retry < 10) {
