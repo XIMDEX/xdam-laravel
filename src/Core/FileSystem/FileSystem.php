@@ -7,6 +7,31 @@ use Ximdex\Core\FileSystem\FileSystem as XFileSystem;
 
 class FileSystem extends XFileSystem
 {
+    const PREVIEW_TYPES = [
+        'image'
+    ];
+
+    public function cachePreview(string $path, string $type, string $cacheKey = null)
+    {
+        $image = null;
+        $hasCache = \Cache::get($cacheKey);
+        if (in_array($type, static::PREVIEW_TYPES) && is_null($hasCache)) {
+            $data = $this->get($path);
+            $image = \Image::cache(function ($image) use ($data) {
+                $image->make($data)->resize(null, 300, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+            }, 10, true);
+        } elseif ($hasCache) {
+            $image = \Image::make($hasCache);
+        } else {
+            abort(404);
+        }
+
+        return $image;
+    }
+
     /**
      * Undocumented function
      *

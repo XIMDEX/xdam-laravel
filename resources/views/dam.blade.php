@@ -2,16 +2,7 @@
 
 <app-root></app-root>
 <script>
-    window.$xdam = {
-        token: "{{ $dam_token }}",
-        base_url: "{{ $dam_url }}",
-        base_params: {},
-        profile: 'light',
-        endpoints: {!! json_encode($dam_endpoints) !!},
-        models: {!! json_encode($dam_models) !!},
-        forms: {!! json_encode($dam_form) !!},
-        tabsform: {!! json_encode($dam_tabs_form) !!}
-    }
+    window.$xdam = @json($settings);
 </script>
 
 <script type="text/javascript" src="{{ asset('vendor/xdam/runtime.js') }}"></script>
