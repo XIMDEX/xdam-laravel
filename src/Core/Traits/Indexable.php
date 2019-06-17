@@ -2,6 +2,7 @@
 
 namespace Dam\Core\Traits;
 
+use Dam\Models\Resource;
 use Dam\Core\FileSystem\FileSystem;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +17,7 @@ trait Indexable
         return $this;
     }
 
-    protected function fromStorage(Model $repository)
+    protected function loadRepository(Model $repository)
     {
         $disk = $repository->type;
 
@@ -24,7 +25,23 @@ trait Indexable
             'driver' => $disk
         ], $repository->settings_json);
 
-        $fileSystem = new FileSystem($configs, $disk);
+        return new FileSystem($configs, $disk);
+    }
+
+    protected function getPreview(Model $repository, Resource $resource)
+    {
+        $fileSystem = $this->loadRepository($repository);
+        $image = $fileSystem->cachePreview($resource->path, $resource->type, $resource->cache_hash);
+        if (isset($image->cachekey)) {
+            $resource->cache_hash = $image->cachekey;
+            $resource->save();
+        }
+        return $image->response();
+    }
+
+    protected function fromStorage(Model $repository)
+    {
+        $fileSystem = $this->loadRepository($repository);
 
         $fileSystem->findFiles(function ($file) use ($repository) {
             $indexableModel = static::$baseIndexableNamespace . '\\' . ucfirst($file['type']);
@@ -35,8 +52,8 @@ trait Indexable
 
             $file = array_merge($file, [
                 'repository_id' => $repository->id,
-                'context' => $repository->context,
-                'context_resource' => $file['fullpath'],
+                'path' => $file['fullpath'],
+                'filename' => $file['name'],
                 'auth_groups' => [
                     '*'
                 ],
@@ -45,7 +62,11 @@ trait Indexable
                 ],
             ]);
 
-            $indexableModel::createOrUpdate($file, "context_resource");
+            $filters['path'] = $file['path'];
+            $filters['filename'] = $file['filename'];
+            $filters['repository_id'] = $file['repository_id'];
+
+            $indexableModel::updateOrCreate($filters, $file);
         });
     }
 }

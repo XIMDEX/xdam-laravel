@@ -4,6 +4,8 @@ namespace Dam;
 
 use Dam\Events\ResourceSaved;
 use Dam\Listeners\GenerateThumbnails;
+use Intervention\Image\Facades\Image;
+use Illuminate\Foundation\AliasLoader;
 use Dam\Console\Commands\ReindexCommand;
 use Dam\Console\Commands\CreateThumbnail;
 use Dam\Console\Commands\RegenerateThumbnails;
@@ -37,7 +39,7 @@ class DamServiceProvider extends EventServiceProvider
             RegenerateThumbnails::class
         ]);
         $this->loadViewsFrom(__DIR__ . "/../resources/views", 'xdam');
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'xfind');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'xfind');
 
         $this->publishes([
             __DIR__ . '/../public/' => public_path('vendor/xdam'),
@@ -48,6 +50,10 @@ class DamServiceProvider extends EventServiceProvider
         $this->publishes([
             __DIR__ . '/../resources/lang' => resource_path('lang'),
         ], 'langs');
+
+        $this->publishes([
+            __DIR__ . '/../config/config.php' => config_path('xdam.php'),
+        ], 'xadm.settings');
     }
 
     /**
@@ -58,8 +64,13 @@ class DamServiceProvider extends EventServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/config.php',
+            __DIR__ . '/../config/config.php',
             'xdam'
         );
+
+        $this->app->booting(function () {
+            $loader = AliasLoader::getInstance();
+            $loader->alias('Image', Image::class);
+        });
     }
 }

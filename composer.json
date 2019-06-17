@@ -11,7 +11,9 @@
     "require": {
         "ximdex/xfind-laravel": "dev-develop",
         "vaites/php-apache-tika": "^0.5.1",
-        "ximdex/semantic_information_repository": "dev-develop"
+        "ximdex/semantic_information_repository": "dev-develop",
+        "intervention/image": "^2.4",
+        "intervention/imagecache": "^2.3.4"
     },
     "autoload": {
         "psr-4": {
@@ -21,7 +23,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Dam\\DamServiceProvider"
+                "Dam\\DamServiceProvider",
+                "Intervention\\Image\\ImageServiceProvider"
             ]
         }
     }
