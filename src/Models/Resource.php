@@ -30,7 +30,6 @@ class Resource extends Model
     ];
 
     protected $facets = [
-        'type',
         'extension'
     ];
 
@@ -53,4 +52,25 @@ class Resource extends Model
         }
         return $url;
     }
+
+    /**
+     * Delete the model from the database.
+     *
+     * @return bool|null
+     *
+     * @throws \Exception
+     */
+    public function remove()
+    {
+        $result = parent::remove();
+
+        if ($result) {
+            $this->deleteResource();
+        }
+
+        return $result;
+    }
+
+    protected function deleteResource()
+    { }
 }

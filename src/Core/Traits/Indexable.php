@@ -39,6 +39,12 @@ trait Indexable
         return $image->response();
     }
 
+    protected function remove(Model $repository, Resource $resource)
+    {
+        $fileSystem = $this->loadRepository($repository);
+        return $fileSystem->delete($resource->path);
+    }
+
     protected function fromStorage(Model $repository)
     {
         $fileSystem = $this->loadRepository($repository);
