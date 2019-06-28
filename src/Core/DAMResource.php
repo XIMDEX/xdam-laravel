@@ -12,11 +12,11 @@ class DAMResource
     {
         $resource = $resource->store($attributes);
         $hasSolr = config('xdam.enable_solr');
-        
+
         if ($hasSolr && $resource !== false) {
             $attrs = $resource->attrsToIndex();
             if (!is_null($attrs)) {
-                $saved = $resIndex->save($attrs);
+                $saved = $resIndex->updateOrCreate(['id' => $attrs['id']], $attrs);
                 if (!$saved) {
                     throw new \ErrorException('Model indexation not saved', 400);
                 }
@@ -24,5 +24,4 @@ class DAMResource
         }
         return $resource;
     }
-
 }

@@ -14,7 +14,6 @@ class Dam
 
 
     private $form = [];
-    private $tabsForm = [];
 
     public function __construct($url, $token = null)
     {
@@ -30,12 +29,6 @@ class Dam
     public function setForm(array $form)
     {
         $this->form = $form;
-        return $this;
-    }
-
-    public function setTabsForm(array $form)
-    {
-        $this->tabsForm = $form;
         return $this;
     }
 
@@ -91,7 +84,8 @@ class Dam
             'token' => 'token',
             'base_url' => 'url',
             'endpoints' => 'endpoints',
-            'settings' => 'settings'
+            'settings' => 'settings',
+            'form' => 'form'
         ];
         $dam = [];
 
