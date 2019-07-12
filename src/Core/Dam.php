@@ -58,17 +58,19 @@ class Dam
 
     public function addEndpoints(string $endpoint, ...$routes)
     {
-        [$list, $get, $post, $delete] = array_replace([null, null, null, null], $routes);
+        [$list, $get, $post, $put, $delete] = array_replace([null, null, null, null, null], $routes);
 
-        if (is_null($get) && is_null($post) && is_null($delete)) {
-            $get = $post = $delete = $list;
-        } elseif (is_null($post) && is_null($delete)) {
-            $post = $delete = $get;
+        if (is_null($get) && is_null($post) && is_null($put) && is_null($delete)) {
+            $get = $post = $put = $delete = $list;
+        } elseif (is_null($post) && is_null($put) && is_null($delete)) {
+            $post = $put = $delete = $get;
+        } elseif (is_null($put) && is_null($delete)) {
+            $put = $delete = $post;
         } elseif (is_null($delete)) {
-            $delete = $post;
+            $delete = $put;
         }
 
-        $this->endpoints[$endpoint] = compact('list', 'get', 'post', 'delete');
+        $this->endpoints[$endpoint] = compact('list', 'get', 'post', 'put', 'delete');
         return $this;
     }
 
